@@ -10,11 +10,11 @@ def logi():
         username=request.args.get("username")
         password=request.args.get("password")
     except:
-        return ("data not accesseble")
+        return "data not accesseble"
     try:
         select_query = "SELECT * FROM users where username = " + "'" + username + "' and password = " + "MD5('" + password + "')"
     except:
-        return "queries"+select_query
+        return "queries"
     try:
         db_cursor.execute(select_query)
     except:
@@ -89,9 +89,10 @@ def location(msg_received):
 
 try:
     chat_db = psycopg2.connect(host="ec2-54-211-55-24.compute-1.amazonaws.com",database="d5vg3bqvsednid",user="cyrvcmwerwegek",password="b96dd8be6079e019632c13464a7e483645a2bedf5d191536b35f4c5e66d08366",port="5432")
+    db_cursor = chat_db.cursor()
 except:
     sys.exit("Error connecting to the database. Please check your inputs.")
-db_cursor = chat_db.cursor()
+
 
 @app.route('/mode', methods=['GET'])
 def low():
