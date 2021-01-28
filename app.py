@@ -10,7 +10,6 @@ def logi():
     try:
         username1=request.args.get("username")
         password1=request.args.get("password")
-        return username1
     except:
         return "data not accesseble"
     try:
