@@ -2,6 +2,7 @@ import sys
 import flask
 import psycopg2
 from flask import request
+import hashlib
 app = flask.Flask(__name__)
 
 @app.route('/log',methods=['GET'])
@@ -12,11 +13,14 @@ def logi():
     except:
         return "data not accesseble"
     try:
-        select_query = "SELECT * FROM users where username = " + "'" + username + "' and password = " + "MD5('" + password + "')"
-    except Exception as e:
-        return e
+        #select_query = "SELECT * FROM users where username = " + "'" + username + "' and password = " + "MD5('" + password + "')"
+        select_query="select * from users where username=%s and password=%s"
+        va=(username,hashlib.md5(str(password)))
+
+    except:
+        return "qurires"
     try:
-        db_cursor.execute(select_query)
+        db_cursor.execute(select_query,va)
     except:
         return select_query
     try:
