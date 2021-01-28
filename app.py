@@ -3,7 +3,7 @@ import flask
 import psycopg2
 from flask import request
 app = flask.Flask(__name__)
-@app.route('/log',methods=['POST'])
+@app.route('/log',methods=['GET'])
 def logi():
     try:
         username=request.args.get("username")
