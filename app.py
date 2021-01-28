@@ -14,7 +14,7 @@ def logi():
         return "data not accesseble"
     try:
         #select_query = "SELECT * FROM users where username = " + "'" + username + "' and password = " + "MD5('" + password + "')"
-        select_query="select * from users where username='rushi' and password='12455'"
+        select_query="select * from users where username='"+username+"' and password='"+password+"'"
 
     except:
         return "qurires"
