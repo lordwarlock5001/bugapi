@@ -3,11 +3,6 @@ import flask
 import psycopg2
 app = flask.Flask(__name__)
 
-@app.route('/',methods=['GET'])
-def test_f():
-    name=request.args['name']
-    return name
-
 @app.route('/register', methods=['POST'])
 def register(msg_received):
     firstname = msg_received["firstname"]
