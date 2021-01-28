@@ -5,11 +5,17 @@ from flask import request
 app = flask.Flask(__name__)
 @app.route('/log',methods=['POST'])
 def logi():
-    username=request.args.get("username")
-    password=request.args.get("password")
-    select_query = "SELECT firstname, lastname FROM user where username = " + "'" + username + "' and password = " + "MD5('" + password + "')"
-    db_cursor.execute(select_query)
-    records = db_cursor.fetchall()
+    try:
+        username=request.args.get("username")
+        password=request.args.get("password")
+    except:
+        print("data not accesseble")
+    try:
+        select_query = "SELECT firstname, lastname FROM user where username = " + "'" + username + "' and password = " + "MD5('" + password + "')"
+        db_cursor.execute(select_query)
+        records = db_cursor.fetchall()
+    except:
+        print("problem with sql")
     if len(records) == 0:
         return "failure"
     else:
