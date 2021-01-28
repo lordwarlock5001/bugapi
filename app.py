@@ -1,8 +1,20 @@
 import sys
 import flask
 import psycopg2
+from flask import request
 app = flask.Flask(__name__)
+@app.route('/log',methods=['POST'])
+def logi():
+    username=request.args.get("username")
+    password=request.args.get("password")
+    select_query = "SELECT first_name, last_name FROM user where username = " + "'" + username + "' and password = " + "MD5('" + password + "')"
+    db_cursor.execute(select_query)
+    records = db_cursor.fetchall()
 
+    if len(records) == 0:
+        return "failure"
+    else:
+        return "success"
 @app.route('/register', methods=['POST'])
 def register(msg_received):
     firstname = msg_received["firstname"]
