@@ -17,8 +17,10 @@ def logi():
         db_cursor.execute(select_query)
     except:
         return select_query
-    records = db_cursor.fetchall()
-
+    try:
+        records = db_cursor.fetchall()
+    except:
+        return "fetchall"
     if len(records) == 0:
         return "failure"
     else:
