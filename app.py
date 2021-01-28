@@ -7,10 +7,9 @@ app = flask.Flask(__name__)
 def logi():
     username=request.args.get("username")
     password=request.args.get("password")
-    select_query = "SELECT first_name, last_name FROM user where username = " + "'" + username + "' and password = " + "MD5('" + password + "')"
+    select_query = "SELECT firstname, lastname FROM user where username = " + "'" + username + "' and password = " + "MD5('" + password + "')"
     db_cursor.execute(select_query)
     records = db_cursor.fetchall()
-
     if len(records) == 0:
         return "failure"
     else:
