@@ -21,10 +21,13 @@ def logi():
         records = db_cursor.fetchall()
     except:
         return "fetchall"
-    if len(records) == 0:
-        return "failure"
-    else:
-        return "success"
+    try:
+        if len(records) == 0:
+            return "failure"
+        else:
+            return "success"
+    except:
+        return "last one"
 
 @app.route('/register', methods=['POST'])
 def register(msg_received):
