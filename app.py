@@ -12,7 +12,7 @@ def logi():
     except:
         return ("data not accesseble")
     try:
-        select_query = "SELECT firstname, lastname FROM user where username = " + "'" + username + "' and password = " + "MD5('" + password + "')"
+        select_query = "SELECT firstname, lastname FROM users where username = " + "'" + username + "' and password = " + "MD5('" + password + "')"
         db_cursor.execute(select_query)
         records = db_cursor.fetchall()
     except:
@@ -36,7 +36,7 @@ def register(msg_received):
     if len(records) != 0:
         return "Another user used the username. Please chose another username."
 
-    insert_query = "INSERT INTO user(first_name, last_name, mobile_no, username, password) VALUES (%s, %s, %s, MD5(%s))"
+    insert_query = "INSERT INTO users(first_name, last_name, mobile_no, username, password) VALUES (%s, %s, %s, MD5(%s))"
     insert_values = (firstname, lastname, mobileno, username, password)
     try:
         db_cursor.execute(insert_query, insert_values)
@@ -51,7 +51,7 @@ def login(msg_received):
     username = msg_received["username"]
     password = msg_received["password"]
 
-    select_query = "SELECT first_name, last_name FROM user where username = " + "'" + username + "' and password = " + "MD5('" + password + "')"
+    select_query = "SELECT first_name, last_name FROM users where username = " + "'" + username + "' and password = " + "MD5('" + password + "')"
     db_cursor.execute(select_query)
     records = db_cursor.fetchall()
 
@@ -68,7 +68,7 @@ def location(msg_received):
     description = msg_received["descp"]
     username = msg_received["username"]
 
-    insert_query = "INSERT INTO location (user, longitude, latitude, description) VALUES (%s, %s, %s, MD5(%s))"
+    insert_query = "INSERT INTO location (users, longitude, latitude, description) VALUES (%s, %s, %s, MD5(%s))"
     insert_values = (username, longitude, latitude, description)
     try:
         db_cursor.execute(insert_query, insert_values)
