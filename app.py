@@ -8,13 +8,14 @@ app = flask.Flask(__name__)
 @app.route('/log',methods=['GET'])
 def logi():
     try:
-        username=request.args.get("username")
-        password=request.args.get("password")
+        username1=request.args.get("username")
+        password1=request.args.get("password")
+        return username1
     except:
         return "data not accesseble"
     try:
         #select_query = "SELECT * FROM users where username = " + "'" + username + "' and password = " + "MD5('" + password + "')"
-        select_query="select * from users where username='"+username+"' and password='"+password+"'"
+        select_query="select * from users where username='"+username1+"' and password='"+password1+"'"
 
     except:
         return "qurires"
