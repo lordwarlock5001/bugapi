@@ -13,8 +13,8 @@ def logi():
         return "data not accesseble"
     try:
         select_query = "SELECT * FROM users where username = " + "'" + username + "' and password = " + "MD5('" + password + "')"
-    except:
-        return "queries"
+    except Exception as e:
+        return e
     try:
         db_cursor.execute(select_query)
     except:
