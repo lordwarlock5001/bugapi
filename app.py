@@ -64,10 +64,10 @@ def register():
     try:
         db_cursor.execute(insert_query, insert_values)
         chat_db.commit()
-        return json.load('{"task":"succes"}')
+        return json.loads('{"task":"succes"}')
     except:
         #print("Error while inserting the new record :", repr(e))
-        return json.load('{"task":"failure"}')
+        return json.loads('{"task":"failure"}')
 
 @app.route('/login', methods=['POST'])
 def login():
@@ -80,9 +80,9 @@ def login():
     records = db_cursor.fetchall()
 
     if len(records) == 0:
-        return json.load('{"task":"failure"}')
+        return json.loads('{"task":"failure"}')
     else:
-        return json.load('{"task":"succes"}')
+        return json.loads('{"task":"succes"}')
 
 
 @app.route('/location', methods=['POST'])
@@ -98,10 +98,10 @@ def location():
     try:
         db_cursor.execute(insert_query, insert_values)
         chat_db.commit()
-        return json.load('{"task":"succes"}')
+        return json.loads('{"task":"succes"}')
     except:
         #print("Error while inserting the new record :", repr(e))
-        return json.load('{"task":"failure"}')
+        return json.loads('{"task":"failure"}')
 
 try:
     chat_db = psycopg2.connect(host="ec2-54-211-55-24.compute-1.amazonaws.com",database="d5vg3bqvsednid",user="cyrvcmwerwegek",password="b96dd8be6079e019632c13464a7e483645a2bedf5d191536b35f4c5e66d08366",port="5432")
