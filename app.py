@@ -5,11 +5,12 @@ from flask import request
 import hashlib
 app = flask.Flask(__name__)
 
-@app.route('/log',methods=['GET'])
+@app.route('/log',methods=['POST'])
 def logi():
     try:
-        username1=request.args.get("username")
-        password1=request.args.get("password")
+        username1=request.form.get("username")
+        password1=request.form.get("password")
+
     except:
         return "data not accesseble"
     try:
@@ -60,6 +61,7 @@ def register(msg_received):
 
 @app.route('/login', methods=['POST'])
 def login(msg_received):
+
     username = msg_received["username"]
     password = msg_received["password"]
 
