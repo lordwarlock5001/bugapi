@@ -98,8 +98,8 @@ def location():
         db_cursor.execute(insert_query, insert_values)
         chat_db.commit()
         return "success"
-    except Exception as e:
-        print("Error while inserting the new record :", repr(e))
+    except:
+        #print("Error while inserting the new record :", repr(e))
         return "failure"
 
 try:
