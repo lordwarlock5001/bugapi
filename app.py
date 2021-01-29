@@ -58,7 +58,7 @@ def register():
         chat_db.commit()
         return "success"
     except Exception as e:
-        print("Error while inserting the new record :", repr(e))
+        #print("Error while inserting the new record :", repr(e))
         return "failure"
 
 @app.route('/login', methods=['POST'])
