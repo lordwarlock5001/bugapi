@@ -71,6 +71,7 @@ def register():
 
 @app.route('/login', methods=['POST'])
 def login():
+    return request.content_encoding
     msg_received = request.json
     username = msg_received["username"]
     password = msg_received["password"]
@@ -109,7 +110,11 @@ try:
 except:
     sys.exit("Error connecting to the database. Please check your inputs.")
 
-
+@app.route('/update_status',methods=['GET'])
+def upadate_st():
+    id=request.args.get("uid")
+    sql="update machines set status='online' where uid="+id
+    db_cursor.execute(sql)
 @app.route('/mode', methods=['GET'])
 def low():
     return "Status:LOW"

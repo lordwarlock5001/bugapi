@@ -6,7 +6,8 @@ try:
 except:
     print("not connected")
 cur=conn.cursor()
-cur.execute("""create table users(firstname varchar(50),lastname varchar (50),mobile_no varchar (12),username varchar (60),password varchar (60))""")
+#cur.execute("""create table machines(uid int,lat float(15),lag float(15),status varchar (10))""")
+cur.execute("""insert into machines values(123,18.445089,73.868980,'offline')""")
 conn.commit()
 cur.close()
 conn.close()
