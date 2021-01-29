@@ -8,8 +8,9 @@ app = flask.Flask(__name__)
 @app.route('/log',methods=['POST'])
 def logi():
     try:
-        username1=request.form.get("username")
-        password1=request.form.get("password")
+        data=request.json
+        username1=data["username"]
+        password1=data["password"]
 
     except:
         return "data not accesseble"
