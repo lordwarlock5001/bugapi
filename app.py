@@ -37,7 +37,8 @@ def logi():
         return "last one"
 
 @app.route('/register', methods=['POST'])
-def register(msg_received):
+def register():
+    msg_received=request.json
     firstname = msg_received["firstname"]
     lastname = msg_received["lastname"]
     mobileno = msg_received["mobileno"]
@@ -61,12 +62,12 @@ def register(msg_received):
         return "failure"
 
 @app.route('/login', methods=['POST'])
-def login(msg_received):
-
+def login():
+    msg_received = request.json
     username = msg_received["username"]
     password = msg_received["password"]
 
-    select_query = "SELECT first_name, last_name FROM users where username = " + "'" + username + "' and password = " + "MD5('" + password + "')"
+    select_query = "SELECT firstname, lastname FROM users where username = " + "'" + username + "' and password = " + "MD5('" + password + "')"
     db_cursor.execute(select_query)
     records = db_cursor.fetchall()
 
@@ -77,7 +78,8 @@ def login(msg_received):
 
 
 @app.route('/location', methods=['POST'])
-def location(msg_received):
+def location():
+    msg_received = request.json
     longitude = msg_received["log"]
     latitude = msg_received["lat"]
     description = msg_received["descp"]
