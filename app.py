@@ -44,15 +44,19 @@ def register():
     mobileno = msg_received["mobileno"]
     username = msg_received["username"]
     password = msg_received["password"]
-
-    select_query = "SELECT * FROM users where username = " + "'" + username + "'"
-    db_cursor.execute(select_query)
-    records = db_cursor.fetchall()
-    if len(records) != 0:
-        return "Another user used the username. Please chose another username."
-
-    insert_query = "INSERT INTO users(firstname, lastname, mobile_no, username, password) VALUES (%s, %s,%s, %s, MD5(%s))"
-    insert_values = (firstname, lastname, mobileno, username, password)
+    try:
+        select_query = "SELECT * FROM users where username = " + "'" + username + "'"
+        db_cursor.execute(select_query)
+        records = db_cursor.fetchall()
+        if len(records) != 0:
+            return "Another user used the username. Please chose another username."
+    except:
+        return "second part"
+    try:
+        insert_query = "INSERT INTO users(firstname, lastname, mobile_no, username, password) VALUES (%s, %s,%s, %s, MD5(%s))"
+        insert_values = (firstname, lastname, mobileno, username, password)
+    except:
+        return "queres"
     try:
         db_cursor.execute(insert_query, insert_values)
         chat_db.commit()
