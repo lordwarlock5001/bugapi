@@ -51,7 +51,7 @@ def register():
     if len(records) != 0:
         return "Another user used the username. Please chose another username."
 
-    insert_query = "INSERT INTO users(first_name, last_name, mobile_no, username, password) VALUES (%s, %s, %s, MD5(%s))"
+    insert_query = "INSERT INTO users(firstname, lastname, mobile_no, username, password) VALUES (%s, %s, %s, MD5(%s))"
     insert_values = (firstname, lastname, mobileno, username, password)
     try:
         db_cursor.execute(insert_query, insert_values)
