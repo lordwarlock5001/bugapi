@@ -38,12 +38,15 @@ def logi():
 
 @app.route('/register', methods=['POST'])
 def register():
-    msg_received=request.json
-    firstname = msg_received["firstname"]
-    lastname = msg_received["lastname"]
-    mobileno = msg_received["mobileno"]
-    username = msg_received["username"]
-    password = msg_received["password"]
+    try:
+        msg_received=request.json
+        firstname = msg_received["firstname"]
+        lastname = msg_received["lastname"]
+        mobileno = msg_received["mobileno"]
+        username = msg_received["username"]
+        password = msg_received["password"]
+    except:
+        return "data fetching"
     try:
         select_query = "SELECT * FROM users where username = " + "'" + username + "'"
         db_cursor.execute(select_query)
@@ -61,7 +64,7 @@ def register():
         db_cursor.execute(insert_query, insert_values)
         chat_db.commit()
         return "success"
-    except Exception as e:
+    except:
         #print("Error while inserting the new record :", repr(e))
         return "failure"
 
