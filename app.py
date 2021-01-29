@@ -42,7 +42,7 @@ def register():
         msg_received=request.json
         firstname = msg_received["firstname"]
         lastname = msg_received["lastname"]
-        mobileno = msg_received["mobileno"]
+        mobileno = msg_received["mobile_no"]
         username = msg_received["username"]
         password = msg_received["password"]
     except:
