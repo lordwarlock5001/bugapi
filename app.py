@@ -45,7 +45,7 @@ def register():
     username = msg_received["username"]
     password = msg_received["password"]
 
-    select_query = "SELECT * FROM user where username = " + "'" + username + "'"
+    select_query = "SELECT * FROM users where username = " + "'" + username + "'"
     db_cursor.execute(select_query)
     records = db_cursor.fetchall()
     if len(records) != 0:
