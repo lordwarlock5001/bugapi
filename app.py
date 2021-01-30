@@ -72,10 +72,10 @@ def register():
 
 @app.route('/login', methods=['POST'])
 def login():
-    return request.headers["Content-Type"]
-    msg_received = request.json
-    username = msg_received["username"]
-    password = msg_received["password"]
+    #return request.headers["Content-Type"]
+    #msg_received = request.json
+    username = request.form.get("username")
+    password = request.form.get("password")
 
     select_query = "SELECT firstname, lastname FROM users where username = " + "'" + username + "' and password = " + "MD5('" + password + "')"
     db_cursor.execute(select_query)
