@@ -72,7 +72,7 @@ def register():
 
 @app.route('/login', methods=['POST'])
 def login():
-    return request.content_encoding
+    return request.content_encoding.__str__()
     msg_received = request.json
     username = msg_received["username"]
     password = msg_received["password"]
