@@ -8,7 +8,6 @@ app = flask.Flask(__name__)
 
 @app.route('/log',methods=['POST'])
 def logi():
-    return  str(request)
     try:
         data=request.json
         username1=data["username"]
