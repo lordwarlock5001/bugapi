@@ -73,8 +73,9 @@ def register():
 def login():
     #return request.headers["Content-Type"]
     #msg_received = request.json
-    username = request.form.get("username")
-    password = request.form.get("password")
+    data = request.json
+    username = data["username"]
+    password = data["password"]
 
     select_query = "SELECT firstname, lastname FROM users where username = " + "'" + username + "' and password = " + "MD5('" + password + "')"
     db_cursor.execute(select_query)
