@@ -21,3 +21,7 @@ def Create_U(request:User,db:session=Depends(get_db)):
     db.commit()
     db.refresh(new_user)
     return new_user
+
+@app.get("/")
+def index_():
+   return "welcome"
