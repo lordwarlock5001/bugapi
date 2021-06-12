@@ -1,11 +1,12 @@
 from fastapi import FastAPI,Depends
 from typing import Optional
 from database import engine,SessionLocal
+print("main:packages")
 import models
 from schemas import User
 from sqlalchemy.orm import session
 models.Base.metadata.create_all(bind=engine)
-
+print("main:files")
 app=FastAPI()
 def get_db():
    db = SessionLocal()
