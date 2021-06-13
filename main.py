@@ -1,5 +1,5 @@
 from sqlalchemy.orm import session
-from schemas import User, user_model
+from schemas import User, user_model, Log_in
 import models
 
 from fastapi import FastAPI, Depends, Response, status, HTTPException
@@ -78,11 +78,14 @@ def update(email, user_name, user_city, db: session = Depends(get_db)):
 
     return {"msg": "Updated"}
 
+#form_data: OAuth2PasswordRequestForm = Depends()
+
 
 @app.post("/user/login")
 def login(form_data: OAuth2PasswordRequestForm = Depends(), db: session = Depends(get_db)):
     username = form_data.username
     password = form_data.password
+    print(username)
     user = db.query(models.User).filter(
         models.User.user_email == username).first()
     if not user:

@@ -18,6 +18,11 @@ class User(BaseModel):
     user_city: str
 
 
+class Log_in(BaseModel):
+    username: str
+    password: str
+
+
 class user_model(BaseModel):
     user_email: str
     user_name: str
