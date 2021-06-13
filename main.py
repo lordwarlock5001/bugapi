@@ -38,4 +38,6 @@ def index_(db: session = Depends(get_db)):
 def index_(email, db: session = Depends(get_db)):
     users = db.query(models.User).filter(
         models.User.user_email == email).first()
+    if(users == None):
+        return {"msg": "User not present"}
     return users
