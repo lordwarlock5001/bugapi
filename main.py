@@ -1,7 +1,7 @@
 from sqlalchemy.orm import session
 from schemas import User
 import models
-from fastapi import FastAPI, Depends
+from fastapi import FastAPI, Depends, Response, status
 from typing import Optional
 from database import engine, SessionLocal
 print("main:packages")
@@ -35,9 +35,11 @@ def index_(db: session = Depends(get_db)):
 
 
 @app.get("/get/{email}")
-def index_(email, db: session = Depends(get_db)):
+def index_(email, res: Response, db: session = Depends(get_db)):
     users = db.query(models.User).filter(
         models.User.user_email == email).first()
     if(users == None):
+        res.status_code = status.HTTP_404_NOT_FOUND
         return {"msg": "User not present"}
+
     return users
