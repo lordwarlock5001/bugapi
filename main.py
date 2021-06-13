@@ -41,7 +41,7 @@ def index_(db: session = Depends(get_db)):
     return users
 
 
-@app.get("/user/{email}")
+@app.get("/user/{email}", response_model=user_model)
 def index_(email, res: Response, db: session = Depends(get_db), current_user: User = Depends(token_lib.get_current_user)):
     users = db.query(models.User).filter(
         models.User.user_email == email).first()
