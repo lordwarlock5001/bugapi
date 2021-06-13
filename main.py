@@ -32,3 +32,10 @@ def Create_U(request: User, db: session = Depends(get_db)):
 def index_(db: session = Depends(get_db)):
     users = db.query(models.User).all()
     return users
+
+
+@app.get("/get/{email}")
+def index_(email, db: session = Depends(get_db)):
+    users = db.query(models.User).filter(
+        models.User.user_email == email).first()
+    return users
