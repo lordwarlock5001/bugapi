@@ -5,7 +5,7 @@ import models
 from database import get_db, session
 import token_lib
 import random
-from send_email import send_email_background,send_email_async
+from send_email import send_email_async
 from datetime import datetime,timedelta
 users_r = APIRouter(
     prefix="/user",
