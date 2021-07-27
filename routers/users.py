@@ -58,7 +58,9 @@ def verify_otp(email:str,otp:int ,db: session = Depends(get_db)):
         db.commit()
         return "Verified"
     else:
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Otp is invalid")
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Otp is not correct")
+
+
     
 @users_r.get("/", response_model=user_model)
 def index_(email:str, res: Response, db: session = Depends(get_db), current_user: User = Depends(token_lib.get_current_user)):
@@ -67,5 +69,7 @@ def index_(email:str, res: Response, db: session = Depends(get_db), current_user
     if(users == None):
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND, detail="User not present")
-
+    if(users.email_verify == False):
+        raise  HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not verified")
+    
     return users
