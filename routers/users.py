@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends, Response, status, HTTPException,BackgroundTasks
-from schemas import User, user_model, Log_in
+from schemas import Otp_email, User, user_model, Log_in
 from hashing import create_hash, verify_hash
 import models
 from database import get_db, session
@@ -38,12 +38,12 @@ async def verify_req(email:str,db: session = Depends(get_db)):
         models.User.user_email == email).update({"otp_time":datetime.now(),"otp":otp})    
     db.commit()
     await send_email_async(subject="Verify your email",email_to=email,body_e={"Title":"Verify Your OTP","otp":str(otp),"name":users.user_name})
-    return "Otp send successfully"
+    return "Otp sent succ"
 
 @users_r.post("/verify_otp")
-def verify_otp(email:str,otp:int ,db: session = Depends(get_db)):
+def verify_otp(request:Otp_email ,db: session = Depends(get_db)):
     users = db.query(models.User).filter(
-        models.User.user_email == email).first()
+        models.User.user_email == request.email).first()
     if(users == None):
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND, detail="User not present")
@@ -53,7 +53,7 @@ def verify_otp(email:str,otp:int ,db: session = Depends(get_db)):
         raise HTTPException(status_code=status.HTTP_408_REQUEST_TIMEOUT, detail="Otp is experired")
     if(users.otp == None):
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Otp not present")
-    if(users.otp == int(otp)):
+    if(users.otp == int(request.otp)):
         users.email_verify = True
         db.commit()
         return "Verified"

@@ -10,7 +10,10 @@ class Token(BaseModel):
 class TokenData(BaseModel):
     email: Optional[str] = None
 
-
+class Otp_email(BaseModel):
+    email: str
+    otp: str
+    
 class User(BaseModel):
     user_email: str
     password: str
