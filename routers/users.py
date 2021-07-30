@@ -50,7 +50,7 @@ def verify_otp(request:Otp_email ,db: session = Depends(get_db)):
     if(users.otp_time == None):
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not verified")
     if(datetime.now()-users.otp_time > timedelta(minutes=5)):
-        raise HTTPException(status_code=status.HTTP_408_REQUEST_TIMEOUT, detail="Otp is experired")
+        raise HTTPException(status_code=status.HTTP_408_REQUEST_TIMEOUT, detail="otp is expired")
     if(users.otp == None):
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Otp not present")
     if(users.otp == int(request.otp)):
@@ -58,7 +58,7 @@ def verify_otp(request:Otp_email ,db: session = Depends(get_db)):
         db.commit()
         return "Verified"
     else:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Otp is not correct")
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Otp is not invalid")
 
 
     
