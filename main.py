@@ -20,9 +20,13 @@ def login(form_data: OAuth2PasswordRequestForm = Depends(), db: session = Depend
     password = form_data.password
     user = db.query(models.User).filter(
         models.User.user_email == username).first()
+    
     if not user:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND, detail="Invalid creadineals")
+
+    if not user.email_verify:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail={"Error_code":42,"msg":"Email not verified"});
     if pwd_cxt.verify(password, user.password):
         return token_lib.create_access_token(data={"sub": username})
         return "login"
