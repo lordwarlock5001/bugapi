@@ -58,7 +58,7 @@ def verify_otp(request:Otp_email ,db: session = Depends(get_db)):
         db.commit()
         return "Verified"
     else:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Otp is not invalid")
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Otp is invalid")
 
 
     
