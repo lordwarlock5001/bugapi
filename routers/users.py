@@ -62,10 +62,10 @@ def verify_otp(request:Otp_email ,db: session = Depends(get_db)):
 
 
     
-@users_r.get("/", response_model=user_model)
-def index_(email:str, res: Response, db: session = Depends(get_db), current_user: User = Depends(token_lib.get_current_user)):
+@users_r.post("/get", response_model=user_model)
+def index_( res: Response, db: session = Depends(get_db), current_user: User = Depends(token_lib.get_current_user)):
     users = db.query(models.User).filter(
-        models.User.user_email == email).first()
+        models.User.user_email == current_user).first()
     if(users == None):
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND, detail="User not present")
