@@ -71,5 +71,5 @@ def index_( res: Response, db: session = Depends(get_db), current_user: User = D
             status_code=status.HTTP_404_NOT_FOUND, detail="User not present")
     if(users.email_verify == False):
         raise  HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not verified")
-    
+    users.user_name = users.user_name.capitalize();
     return users
